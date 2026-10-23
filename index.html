@@ -93,7 +93,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .title h1 .c{color:var(--cat)} .title h1 .d{color:var(--dog)} .title h1 .x{color:var(--fox)}
 .sub{margin:10px 0 22px;color:var(--muted);font-size:14.5px;line-height:1.6;max-width:62ch}
 .lbl{font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--muted);letter-spacing:.04em;margin:0 0 8px}
-.facs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:18px}
+.facs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:18px}
 .fac{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:14px 16px;border-radius:3px;border:1px solid #3a4452;background:#141920;text-align:left;position:relative;overflow:hidden}
 .fac::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--line)}
 .fac .ic{display:flex;gap:0;flex-wrap:wrap}
@@ -144,6 +144,11 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}@media (max-width:560px){.two{grid-template-columns:1fr}}
 .rcode{display:flex;align-items:baseline;gap:14px;border-bottom:1px dashed var(--line);padding-bottom:8px;margin-bottom:10px}
 #roomBox{display:block!important}#roomBox[hidden]{display:none!important}
+#homeMenu{display:grid;gap:10px;margin-top:22px}#homeMenu .go{font-size:22px;padding:16px}
+.shead{display:flex;align-items:center;gap:14px;margin:18px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line)}.shead b{font-family:var(--f-display);font-weight:400;font-size:24px;letter-spacing:.03em}
+#spdBox{margin-bottom:6px}.lsub{letter-spacing:0;font-weight:400;font-size:12px;color:var(--muted);margin-left:6px}
+.spdrow{display:flex;align-items:center;gap:10px;margin-bottom:6px}.spdrow>span{width:72px;flex:none;font-weight:600;font-size:14px}
+.spdrow .seg{flex:1;margin:0;gap:4px;flex-wrap:nowrap}.spdrow .seg button{min-width:0;padding:7px 4px;font-size:14px}
 #slots{display:grid;gap:6px;margin:4px 0 12px}
 #slots .slot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#141920;border:1px solid #2c3540;border-radius:3px;padding:8px 10px;font-size:14px}
 #slots .slot.dis{opacity:.4}#slots .sn{font-family:var(--f-body);font-weight:600;color:var(--gold);width:16px}#slots .se,#slots .sf{color:var(--muted);font-size:13px}#slots .st2{font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--gas)}
@@ -250,12 +255,25 @@ button:disabled{opacity:.45;cursor:default}
       <p class="eyebrow">실시간 전략 시뮬레이션</p>
       <h1><span class="c">냥</span><span class="d">멍</span><span class="x">여우</span> 대작전</h1>
       <p class="sub">광석과 가스를 확보하고, 기지를 세우고, 부대를 키워 적 진영의 건물을 모두 파괴하세요. 세 군단은 싸우는 방식이 완전히 달라요.</p>
-      <div class="seg modeSeg" id="modeSeg"><button type="button" data-m="ai" class="on">컴퓨터 대전</button><button type="button" data-m="online">온라인 대전</button><button type="button" data-m="rep">리플레이</button></div>
+      <div id="homeMenu">
+        <button class="go" type="button" data-m="ai">컴퓨터 대전</button>
+        <button class="go alt" type="button" data-m="online">온라인 대전</button>
+        <button class="go alt" type="button" data-m="rep">리플레이</button>
+        <button class="go alt" id="helpBtn" type="button">게임 설명</button>
+      </div>
+      <div id="setup" hidden>
+      <div class="shead"><button class="hbtn" id="backHome" type="button">← 처음으로</button><b id="setupTitle">컴퓨터 대전</b></div>
       <p class="lbl" id="facLbl">내 진영</p>
       <div class="facs">
         <button class="fac on" data-f="cat" type="button"><div class="ic" data-icons="cat"></div><b>냥냥 군단</b><span>기계 군단. 정비냥이 끝까지 붙어서 건물을 짓고 수리해요. 보급고로 보급을 늘리고, 크게 부서진 건물은 불타요. 포격 모드 전차, 은폐 전투기, 지역 탐색.</span></button>
         <button class="fac" data-f="dog" type="button"><div class="ic" data-icons="dog"></div><b>멍멍 군단</b><span>생체 군단. 모든 유닛은 애벌레에서 알을 거쳐 태어나고, 일꾼견은 몸이 건물로 변해요. 군락지 위에만 지을 수 있고 체력이 저절로 차요. 감시견, 잠복, 매복견.</span></button>
         <button class="fac" data-f="fox" type="button"><div class="ic" data-icons="fox"></div><b>여우 군단</b><span>사이오닉 군단. 탐사여우가 건물을 소환만 하면 혼자 완성돼요. 모든 유닛에 보호막이 있어 저절로 차오르고, 건물은 수정탑 전력 안에서만 돌아가요. 사이오닉 폭풍, 모선여우.</span></button>
+      </div>
+      <div id="spdBox">
+        <p class="lbl">게임 속도 <span class="lsub" id="spdNote"></span></p>
+        <div class="spdrow"><span>건설</span><div class="seg sseg" data-k="bld"></div></div>
+        <div class="spdrow"><span>생산·연구</span><div class="seg sseg" data-k="prod"></div></div>
+        <div class="spdrow"><span>이동</span><div class="seg sseg" data-k="move"></div></div>
       </div>
       <div id="aiPanel">
       <div class="two">
@@ -275,8 +293,9 @@ button:disabled{opacity:.45;cursor:default}
       </div>
       <p class="lbl">컴퓨터 난이도</p>
       <div class="seg" id="diffSeg">
-        <button type="button" data-d="easy">쉬움</button>
-        <button type="button" data-d="normal" class="on">보통</button>
+        <button type="button" data-d="vEasy">아주 쉬움</button>
+        <button type="button" data-d="easy" class="on">쉬움</button>
+        <button type="button" data-d="normal">보통</button>
         <button type="button" data-d="hard">어려움</button>
       </div>
       <label class="chk" for="cheatOk"><input type="checkbox" id="cheatOk"> 치트키 허용 <span>게임 중 Enter를 누르고 입력해요. 쓰면 결과에 "치트 사용"이 남아요.</span></label>
@@ -305,7 +324,7 @@ button:disabled{opacity:.45;cursor:default}
         <div id="repList"></div>
         <label class="go alt repfile" for="repFile">리플레이 파일 불러오기<input id="repFile" type="file" accept=".nmrep,.json,application/json" hidden></label>
       </div>
-      <button class="go alt helpgo" id="helpBtn" type="button">게임 설명 보기</button>
+      </div>
       <p class="credit">made by m00n</p>
     </div>
   </div>
@@ -358,7 +377,7 @@ const FAC={
   dog:{name:'멍멍',full:'멍멍 군단',team:'#3d8bff',teamD:'#1d4fa8',glow:'#8fe3ff',fur:'#6a5644',fur2:'#2f241a',ear:'#3a2c20'},
   fox:{name:'여우',full:'여우 군단',team:'#b06cff',teamD:'#6b33b8',glow:'#7ff5ff',fur:'#c8622a',fur2:'#f2e6d6',ear:'#2a1a12'}
 };
-const FACS=['cat','dog','fox'];
+const FACS=['cat','dog','fox'],LARVA_T=9;
 const DTYPE={n:'일반형',c:'진동형',e:'폭발형'},SIZE={s:'소형',m:'중형',l:'대형'};
 const MULT={n:{s:1,m:1,l:1},c:{s:1,m:.5,l:.25},e:{s:.5,m:.75,l:1}};
 const UNIT={
@@ -487,9 +506,10 @@ const RES={
 const reqOf=(R,f,lv)=>Array.isArray(R.req)?R.req[lv]:R.req[f][lv];
 const resName=(R,lv)=>R.lvName?R.lvName[lv]||R.name:R.name+(R.lv>1?` ${lv+1}단계`:'');
 const DIFF={
-  easy:{inc:.7,think:2,first:420,wave:10,waveInc:4,workers:14,towers:0,bar2T:1e9,engT:420,facT:1e9,airT:1e9,expT:1e9,maxBar:2,stim:false,upg:false,siege:false},
-  normal:{inc:1,think:1,first:330,wave:16,waveInc:6,workers:18,towers:1,bar2T:220,engT:260,facT:320,airT:520,expT:520,maxBar:3,stim:true,upg:true,siege:true},
-  hard:{inc:1.25,think:.5,first:250,wave:18,waveInc:6,workers:22,towers:2,bar2T:150,engT:180,facT:230,airT:380,expT:380,maxBar:4,stim:true,upg:true,siege:true}
+  vEasy:{inc:.5,think:3,first:720,wave:8,waveInc:2,workers:10,towers:0,bar2T:1e9,engT:1e9,facT:1e9,airT:1e9,expT:1e9,maxBar:1,stim:false,upg:false,siege:false},
+  easy:{inc:.65,think:2.5,first:540,wave:10,waveInc:3,workers:13,towers:0,bar2T:1e9,engT:480,facT:600,airT:1e9,expT:1e9,maxBar:2,stim:false,upg:false,siege:false},
+  normal:{inc:.85,think:1.5,first:420,wave:14,waveInc:5,workers:16,towers:1,bar2T:300,engT:330,facT:400,airT:620,expT:620,maxBar:3,stim:true,upg:true,siege:true},
+  hard:{inc:1.1,think:.6,first:280,wave:18,waveInc:6,workers:22,towers:2,bar2T:160,engT:200,facT:250,airT:400,expT:400,maxBar:4,stim:true,upg:true,siege:true}
 };
 
 /* ========== 지도 ========== */
@@ -651,6 +671,48 @@ RES.burrow.desc=()=>'일꾼견·돌격견·사격견·역병견·감염냥이 �
 UNIT.dog.ling.cd=.35;UNIT.dog.hydra.cd=.62;UNIT.dog.ultra.cd=.65;UNIT.dog.guardian.cd=1.25;UNIT.dog.brood.cd=.6;
 UNIT.fox.zealot.cd=.91;UNIT.cat.melee.cd=.91;UNIT.cat.goliath.cd=.91;UNIT.dog.devourer.cd=3.0;
 UNIT.fox.dragoon.lockT=.35;UNIT.cat.scoot.lockT=.05;UNIT.cat.tank.lockT=.3;
+/* --- 원작 수치 맞추기 (사거리: 원작 1칸 = 37.5, 속도: 소총냥 84 = 원작 4.0, 공격 간격: 원작 프레임 ÷ 24) --- */
+(()=>{const U=UNIT,set=(f,k,o)=>Object.assign(U[f][k],o);
+  set('cat','worker',{speed:103,cd:.92});set('dog','worker',{speed:103,cd:.92});set('fox','worker',{speed:103,cd:.92});
+  set('cat','scoot',{range:187});set('cat','tank',{range:262,srange:450,speed:84});set('cat','goliath',{range:225,arange:187,speed:96,acd:.92});
+  set('cat','jet',{cd:1.26,acd:.92});set('cat','drop',{speed:115});set('cat','vessel',{speed:105});set('cat','valk',{dmg:36,cd:2.7,range:225});set('cat','bc',{cd:1.26,speed:52});
+  set('dog','ultra',{speed:108});set('dog','lurker',{speed:122,range:225});set('dog','guardian',{speed:52,range:300});set('dog','devourer',{cd:4.2});set('dog','scourge',{speed:140});
+  set('dog','ovl',{speed:17});set('dog','brood',{cd:.63,life:30});set('dog','hydra',{range:150});
+  set('fox','dragoon',{speed:105});set('fox','archon',{speed:103,cd:.84,range:75});set('fox','dt',{cd:1.26});set('fox','reaver',{cd:2.5,range:300});set('fox','shuttle',{speed:93});
+  set('fox','obs',{speed:70});set('fox','scout',{speed:105,cd:1.26,range:150,acd:.92,arange:150});set('fox','corsair',{cd:.34,range:187});set('fox','arbiter',{speed:105,cd:1.89});
+  BLD.cat.tow.cd=.63;BLD.cat.tow.range=262;BLD.fox.tow.cd=.92;BLD.fox.tow.range=262;BLD.dog.tow.cd=1.34;BLD.dog.tow.range=262;BLD.dog.tow2.cd=.63;BLD.dog.tow2.range=262;
+  BLD.dog.hq.sup=1;
+})();
+/* --- 에너지 강화 (최대 에너지 250, 새 유닛은 62.5로 시작) 등 빠진 연구 --- */
+const EN_RES={medic:'cadu',ghost:'moebius',vessel:'titan',bc:'colossus',jet:'apollo',queen:'gamete',defiler:'metasyn',ht:'amulet',darch:'talisman',arbiter:'kcore',corsair:'argus'};
+Object.assign(RES,{
+  cadu:{hk:'C',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'restore',name:'위생냥 에너지 강화',desc:()=>'위생냥의 최대 에너지가 250으로 늘어나요.'},
+  moebius:{hk:'M',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'저격냥 에너지 강화',desc:()=>'저격냥의 최대 에너지가 250으로 늘어나요.'},
+  ocular:{hk:'O',lv:1,cost:[100],gas:[100],bt:[50],req:[null],icon:'scan',name:'저격냥 시야 강화',desc:()=>'저격냥이 더 멀리 봐요.'},
+  titan:{hk:'T',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'과학선 에너지 강화',desc:()=>'과학선냥의 최대 에너지가 250으로 늘어나요.'},
+  irrR:{hk:'I',lv:1,cost:[200],gas:[200],bt:[60],req:[null],icon:'irr',name:'방사능',desc:()=>'과학선냥이 방사능(I)을 쓸 수 있어요.'},
+  colossus:{hk:'O',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'전함 에너지 강화',desc:()=>'전함냥의 최대 에너지가 250으로 늘어나요.'},
+  apollo:{hk:'A',lv:1,cost:[200],gas:[200],bt:[60],req:[null],icon:'stim',name:'전투기 에너지 강화',desc:()=>'전투기냥의 최대 에너지가 250으로 늘어나요.'},
+  satk:{hk:'W',lv:3,cost:[100,175,250],gas:[100,175,250],bt:[60,75,90],req:{cat:[null,'sci','sci']},icon:'atkup',name:'비행선 무기 강화',desc:()=>'하늘을 나는 기계 유닛의 공격력이 올라가요.'},
+  sarm:{hk:'P',lv:3,cost:[150,225,300],gas:[150,225,300],bt:[60,75,90],req:{cat:[null,'sci','sci']},icon:'armup',name:'비행선 장갑 강화',desc:()=>'하늘을 나는 기계 유닛의 방어력이 1 올라가요.'},
+  gamete:{hk:'G',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'여왕견 에너지 강화',desc:()=>'여왕견의 최대 에너지가 250으로 늘어나요.'},
+  metasyn:{hk:'M',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'역병견 에너지 강화',desc:()=>'역병견의 최대 에너지가 250으로 늘어나요.'},
+  amulet:{hk:'K',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'명상여우 에너지 강화',desc:()=>'명상여우의 최대 에너지가 250으로 늘어나고, 새 명상여우는 에너지를 더 갖고 나와요.'},
+  talisman:{hk:'A',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'암흑 집정여우 에너지 강화',desc:()=>'암흑 집정여우의 최대 에너지가 250으로 늘어나요.'},
+  kcore:{hk:'K',lv:1,cost:[150],gas:[150],bt:[60],req:[null],icon:'stim',name:'중재여우 에너지 강화',desc:()=>'중재여우의 최대 에너지가 250으로 늘어나요.'},
+  argus:{hk:'J',lv:1,cost:[100],gas:[100],bt:[50],req:[null],icon:'stim',name:'해적선 에너지 강화',desc:()=>'해적선여우의 최대 에너지가 250으로 늘어나요.'},
+  gravd:{hk:'G',lv:1,cost:[200],gas:[200],bt:[60],req:[null],icon:'speed',name:'수송선 속도',desc:()=>'수송선여우가 훨씬 빨라져요.'},
+  scdmg:{hk:'D',lv:1,cost:[200],gas:[200],bt:[60],req:[null],icon:'scarab',name:'스캐럽 위력',desc:()=>'스캐럽의 피해가 25 늘어나요.'}
+});
+RES.vatk.name='차량 무기 강화';RES.varm.name='차량 장갑 강화';
+RES.vatk.desc=f=>f==='cat'?'땅을 달리는 기계 유닛(바이크·전차·로봇냥)의 공격력이 올라가요.':'하늘 유닛의 공격력이 올라가요.';
+RES.varm.desc=f=>f==='cat'?'땅을 달리는 기계 유닛의 방어력이 1 올라가요.':'하늘 유닛의 방어력이 1 올라가요.';
+BLD.cat.arm.res=['vatk','varm','satk','sarm'];BLD.cat.arm.desc='기계 유닛의 무기와 장갑을 강화해요(차량과 비행선 따로). 로봇냥과 발키리냥에 필요해요.';
+BLD.cat.aca.res=['stim','u238','restore','flare','cadu'];BLD.cat.covert.res=['pcloak','lock','ocular','moebius'];BLD.cat.sci.res=['emp','irrR','titan'];
+BLD.cat.plab.res=['yamato','colossus'];BLD.cat.ctower.res=['cloak','apollo'];
+BLD.dog.qnest.res=['ensR','broodR','gamete'];BLD.dog.dmound.res=['plagueR','consumeR','metasyn'];
+BLD.fox.arch.res=['storm','hallu','mind','mael','amulet','talisman'];BLD.fox.tribunal.res=['recallR','stasisR','kcore'];BLD.fox.beacon.res=['grav','apial','ccap','dwebR','argus'];BLD.fox.bay.res=['rcap','scdmg','gravd'];
+UNIT.cat.vessel.desc='숨은 적을 찾는 하늘의 탐지기. 아군에게 방어막(D)을 씌우고, 연구하면 적 생체 유닛을 방사능(I)으로 태우고 EMP 충격파(E)로 보호막과 에너지를 없애요.';
 
 /* ========== DOM ========== */
 const APP=$('#app'),cv=$('#game'),ctx=cv.getContext('2d'),MINI=$('#mini'),mctx=MINI.getContext('2d');
@@ -1306,7 +1368,8 @@ function foxBld(c,x,y,w,h,f,k,t,o){const F=FAC[f],cx=x+w/2,cy=y+h/2,P=3,pw=o.unp
 }
 
 /* ========== 게임 상태 ========== */
-let G=null,choice={f:'cat',d:'normal',e:'rand',n:2,map:'m2',mode:'ffa'};
+let G=null,choice={f:'cat',d:'easy',e:'rand',n:2,map:'m2',mode:'ffa',spd:{bld:2,prod:2,move:1}};
+try{const sv=JSON.parse(localStorage.getItem('nm_spd')||'null');if(sv&&sv.bld)choice.spd=sv;}catch(e){}
 const ROCK={type:'rock'};
 function newSide(fac){return {fac,res:50,gas:0,up:Object.fromEntries(Object.keys(RES).map(k=>[k,0])),st:{made:0,kills:0,gath:0,lost:0},hidden:null,foeAir:false,foeHidden:false};}
 const SIDE_IDS=['p','e','c','d'];
@@ -1321,7 +1384,8 @@ function newGame(cfg){
   if(setMap(mapId))bakeBG();
   seedR(cfg.seed||1);
   const sides=pl.map((_,i)=>SIDE_IDS[i]);
-  G={cfg,cheat:{},cheated:false,cheatSide:null,fields:[],nukes:[],flashT:0,tick:0,t:0,ents:[],grid:new Array(NN).fill(null),vis:{},det:{},creep:new Uint8Array(NN),creepDirty:true,scans:[],
+  const spd=Object.assign({prod:1,bld:1,move:1},cfg.speed||{});
+  G={cfg,spd,cheat:{},cheated:false,cheatSide:null,fields:[],nukes:[],flashT:0,tick:0,t:0,ents:[],grid:new Array(NN).fill(null),vis:{},det:{},creep:new Uint8Array(NN),creepDirty:true,scans:[],
     proj:[],parts:[],marks:[],pings:[],side:{},sides,diff:cfg.diff||'normal',sel:[],groups:{},mode:null,menu:null,over:false,paused:false,nextId:1,visT:0,aiT:3,endT:0,alertT:-99,alertPos:null,
     ai:{},aiSides:{},online:!!cfg.online,cmdList:[],cmdSig:'',selKey:'',rec:[],viewAll:false};
   const used=new Set();
@@ -1368,7 +1432,7 @@ function addUnit(side,k,x,y,fac0){
   const fac=fac0||G.side[side].fac,d=UNIT[fac][k];
   const e={id:G.nextId++,type:'unit',side,fac,kind:k,def:d,x,y,r:d.r,hp:d.hp,maxhp:d.hp,order:{type:'idle'},q:[],cd:0,face:side===ME?1:-1,anim:0,carry:0,ct:'min',
     path:null,pi:0,repT:0,pg:null,acqT:R()*.3,hitT:0,stk:0,lx:x,ly:y,moving:false,ghost:false,inside:false,siege:false,siegeT:0,siegeTo:false,stimT:0,seed:Math.random()*6,calm:0,
-    en:d.energy?50:0,cloak:!!d.perma,bur:false,burT:0,burTo:false,lurkT:0,sh:d.sh||0,maxsh:d.sh||0,mines:d.mines||0,cargo:d.cargo?[]:null,carrier:null,lifeT:d.life||0,lockT:0,matrix:0,matrixT:0,irrT:0,plagueT:0,ensT:0,acid:0,acidT:0,armT:0,stormT:0,arb:false,ammo:0,amQ:0,amT:0,kc:0,maelT:0,stasisT:0};
+    en:d.energy?(EN_RES[k]&&G.side[side].up[EN_RES[k]]?62.5:50):0,cloak:!!d.perma,bur:false,burT:0,burTo:false,lurkT:0,sh:d.sh||0,maxsh:d.sh||0,mines:d.mines||0,cargo:d.cargo?[]:null,carrier:null,lifeT:d.life||0,lockT:0,matrix:0,matrixT:0,irrT:0,plagueT:0,ensT:0,acid:0,acidT:0,armT:0,stormT:0,arb:false,ammo:0,amQ:0,amT:0,kc:0,maelT:0,stasisT:0};
   G.ents.push(e);return e;
 }
 function defaultRally(b){const n=nearestRes(b.x,b.y,500);return n?{x:n.x,y:n.y,res:n}:null;}
@@ -1412,17 +1476,19 @@ function elevOf(e){return isAir(e)?2:ELEV[cellOf(e)];}
 function isHidden(e){return e.type==='unit'&&(e.cloak||e.bur||e.arb);}
 const NONARMY={worker:1,egg:1,ovl:1,mine:1,cocoon:1,obs:1,shuttle:1,drop:1};
 function isArmy(u){return u.type==='unit'&&!NONARMY[u.kind]&&!u.carrier;}
-function speedOf(u){let s=u.def.speed;const U=S_(u).up,k=u.kind;if(k==='ling'&&U.speed)s*=1.55;if(k==='zealot'&&U.leg)s*=1.45;if(k==='scoot'&&U.ion)s*=1.35;if(k==='hydra'&&U.musc)s*=1.3;if(k==='ultra'&&U.anab)s*=1.4;if(k==='ovl'&&U.pneu)s*=3;if(k==='scout'&&U.grav)s*=1.3;if(k==='obs'&&U.obsgrav)s*=1.6;if(u.stimT>0)s*=1.5;if(u.ensT>0)s*=.5;return s;}
-function upAtk(u){const U=G.side[u.side].up;if(u.fac==='cat')return u.def.mech?U.vatk:U.atk;if(u.fac==='fox')return u.def.flying?U.vatk:U.atk;if(u.def.flying)return U.vatk;return (u.def.range||0)>40?U.mis:U.atk;}
-function upArm(u){const U=G.side[u.side].up;if(u.fac==='cat')return u.def.mech?U.varm:U.arm;if(u.fac==='fox')return u.def.flying?U.varm:U.arm;if(u.def.flying)return U.varm;return U.arm;}
+function SPD(k){return (G&&G.spd&&G.spd[k])||1;}
+function speedOf(u){let s=u.def.speed*SPD('move');const U=S_(u).up,k=u.kind;if(k==='ling'&&U.speed)s*=1.55;if(k==='zealot'&&U.leg)s*=1.45;if(k==='scoot'&&U.ion)s*=1.35;if(k==='hydra'&&U.musc)s*=1.3;if(k==='ultra'&&U.anab)s*=1.4;if(k==='ovl'&&U.pneu)s*=3;if(k==='scout'&&U.grav)s*=1.3;if(k==='obs'&&U.obsgrav)s*=1.6;if(k==='shuttle'&&U.gravd)s*=1.5;if(u.stimT>0)s*=1.5;if(u.ensT>0)s*=.5;return s;}
+function enMax(u){return EN_RES[u.kind]&&G.side[u.side]&&G.side[u.side].up[EN_RES[u.kind]]?250:200;}
+function upAtk(u){const U=G.side[u.side].up;if(u.fac==='cat')return u.def.mech?(u.def.flying?U.satk:U.vatk):U.atk;if(u.fac==='fox')return u.def.flying?U.vatk:U.atk;if(u.def.flying)return U.vatk;return (u.def.range||0)>40?U.mis:U.atk;}
+function upArm(u){const U=G.side[u.side].up;if(u.fac==='cat')return u.def.mech?(u.def.flying?U.sarm:U.varm):U.arm;if(u.fac==='fox')return u.def.flying?U.varm:U.arm;if(u.def.flying)return U.varm;return U.arm;}
 function wpn(u,t){
   const d=u.def,air=t&&isAir(t);
   if(u.type==='bld')return {dmg:d.dmg,dt:d.dt||'n',cd:d.cd,range:d.range,proj:d.proj,fx:d.fx||'gun'};
   const up=upAtk(u);
   if(u.siege)return {dmg:d.sdmg+up*5,dt:'e',cd:d.scd,range:d.srange,min:d.smin,splash:d.ssplash,proj:'shell',fx:'cannon'};
-  if(air&&d.adm)return {dmg:d.adm+up*(d.aup||1),dt:d.adt,cd:d.acd,range:(d.arange||d.range)+(u.carrier?32:0)+(u.kind==='goliath'&&G.side[u.side].up.charon?80:0),proj:d.aproj,fx:'missile'};
-  const U=G.side[u.side].up;let range=d.range+(u.carrier?32:0);if(u.kind==='hydra'&&U.range)range+=40;if(u.kind==='ranged'&&U.u238)range+=32;if(u.kind==='dragoon'&&U.sing)range+=60;
-  return {dmg:d.dmg+up*(d.up||0),dt:d.dt||'n',cd:d.carrier?d.cd*8/Math.max(1,u.ammo||0):d.cd,range,proj:d.proj,splash:d.splash,fx:d.fx};
+  if(air&&d.adm)return {dmg:d.adm+up*(d.aup||1),dt:d.adt,cd:d.acd,range:(d.arange||d.range)+(u.carrier?32:0)+(u.kind==='goliath'&&G.side[u.side].up.charon?112:0),proj:d.aproj,fx:'missile'};
+  const U=G.side[u.side].up;let range=d.range+(u.carrier?32:0);if(u.kind==='goliath'&&U.charon&&air)range+=112;if(u.kind==='hydra'&&U.range)range+=40;if(u.kind==='ranged'&&U.u238)range+=32;if(u.kind==='dragoon'&&U.sing)range+=60;
+  return {dmg:d.dmg+up*(d.up||0)+(u.kind==='reaver'&&G.side[u.side].up.scdmg?25:0),dt:d.dt||'n',cd:d.carrier?d.cd*8/Math.max(1,u.ammo||0):d.cd,range,proj:d.proj,splash:d.splash,fx:d.fx};
 }
 function rangeOf(u){return wpn(u,null).range;}
 function canAtk(u){if(u.type==='bld')return !!u.def.dmg&&u.done&&powered(u)&&!inWeb(u);if(!(u.def.dmg>0)||stunned(u)||u.def.mineU)return false;if(u.def.ammo&&!(u.ammo>0))return false;if(!u.inside&&inWeb(u))return false;if(u.carrier&&u.carrier.kind!=='bunk')return false;if(u.def.lurk)return u.bur&&u.burT<=0;if(u.bur||u.burT>0||u.siegeT>0)return false;return true;}
@@ -1558,10 +1624,10 @@ function updUnit(u,dt){
   if(u.maxsh&&u.sh<u.maxsh)u.sh=Math.min(u.maxsh,u.sh+.7*dt);
   if(u.lifeT>0){u.lifeT-=dt;if(u.lifeT<=0){kill(u,null);return;}}
   if(d.mineU){mineStep(u,dt);return;}
-  if(d.energy){u.en=Math.min(200,u.en+.5625*dt);if(u.side===G.cheatSide&&CHT('energy'))u.en=200;if(u.cloak&&!d.perma){u.en-=.9*dt;if(u.en<=0){u.en=0;u.cloak=false;}}}
+  if(d.energy){u.en=Math.min(enMax(u),u.en+.75*dt);if(u.side===G.cheatSide&&CHT('energy'))u.en=enMax(u);if(u.cloak&&!d.perma){u.en-=.9*dt;if(u.en<=0){u.en=0;u.cloak=false;}}}
   if(stunned(u))return;
   if(u.cargo&&u.cargo.length)for(const c of u.cargo){c.x=u.x;c.y=u.y;}
-  if(u.kind==='egg'||u.kind==='cocoon'){u.morph.t+=dt*(u.side===G.cheatSide&&CHT('fast')?10:1);if(u.morph.t>=u.morph.bt)hatch(u);return;}
+  if(u.kind==='egg'||u.kind==='cocoon'){u.morph.t+=dt*SPD('prod')*(u.side===G.cheatSide&&CHT('fast')?10:1);if(u.morph.t>=u.morph.bt)hatch(u);return;}
   if(u.burT>0){u.burT-=dt;if(u.burT<=0){u.bur=u.burTo;u.cd=Math.max(u.cd,.3);}return;}
   if(u.siegeT>0){u.siegeT-=dt;if(u.siegeT<=0){u.siege=u.siegeTo;u.cd=Math.max(u.cd,.4);}return;}
   const o=u.order;
@@ -1641,7 +1707,8 @@ function updUnit(u,dt){
       break;}
     case 'repair':{
       const t=o.target;if(!t||t.dead||t.hp>=t.maxhp||t.side!==u.side){endOrder(u);break;}
-      if(edgeDist(u,t)>10)steer(u,t.x,t.y,t,dt);else{t.hp=Math.min(t.maxhp,t.hp+t.maxhp/((t.def.bt||30)*1.2)*dt);u.anim=(G.t*6%1)<.5?.1:0;if(Math.random()<dt*3)spark(u.x+u.face*u.r,u.y);if(Math.random()<dt*2)sfxAt('weld',u.x,u.y);}
+      if(edgeDist(u,t)>10)steer(u,t.x,t.y,t,dt);else{const dh=Math.min(t.maxhp-t.hp,t.maxhp/((t.def.bt||30)*1.2)*dt),S=S_(u),cm=(t.def.cost||0)*.33*dh/t.maxhp,cg=(t.def.gas||0)*.33*dh/t.maxhp;
+        if(S.res<cm||S.gas<cg){if(u.side===ME)lackMsg(u.side,S.res<cm?'min':'gas');endOrder(u);break;}S.res-=cm;S.gas-=cg;t.hp+=dh;u.anim=(G.t*6%1)<.5?.1:0;if(Math.random()<dt*3)spark(u.x+u.face*u.r,u.y);if(Math.random()<dt*2)sfxAt('weld',u.x,u.y);}
       break;}
   }
   if(ai){
@@ -1662,10 +1729,10 @@ function updBld(b,dt){
   statusTick(b,dt);if(b.dead)return;
   if(b.landT>0){b.landT-=dt;return;}
   if(dog&&b.hp<b.maxhp)b.hp=Math.min(b.maxhp,b.hp+.35*dt);
-  if(b.maxsh&&b.sh<b.maxsh)b.sh=Math.min(b.maxsh,b.sh+(b.done?.7:b.maxsh*.9/b.def.bt)*dt);
+  if(b.maxsh&&b.sh<b.maxsh)b.sh=Math.min(b.maxsh,b.sh+(b.done?.7:b.maxsh*.9*SPD('bld')/b.def.bt)*dt);
   if(!b.done){
-    if(dog||fox||(b.def.addon&&b.parent&&!b.parent.dead&&!b.parent.fly)){b.prog+=dt*bm/b.def.bt;b.hp=Math.min(b.maxhp,b.hp+b.maxhp*.9*dt/b.def.bt);}
-    else{const bu=b.builder;if(bu&&!bu.dead&&bu.order.type==='construct'&&bu.order.b===b&&edgeDist(bu,b)<=10){b.prog+=dt*bm/b.def.bt;b.hp=Math.min(b.maxhp,b.hp+b.maxhp*.9*dt/b.def.bt);}}
+    if(dog||fox||(b.def.addon&&b.parent&&!b.parent.dead&&!b.parent.fly)){b.prog+=dt*bm*SPD('bld')/b.def.bt;b.hp=Math.min(b.maxhp,b.hp+b.maxhp*.9*dt*SPD('bld')/b.def.bt);}
+    else{const bu=b.builder;if(bu&&!bu.dead&&bu.order.type==='construct'&&bu.order.b===b&&edgeDist(bu,b)<=10){b.prog+=dt*bm*SPD('bld')/b.def.bt;b.hp=Math.min(b.maxhp,b.hp+b.maxhp*.9*dt*SPD('bld')/b.def.bt);}}
     if(b.prog>=1){b.prog=1;b.done=true;b.builder=null;if(dog)G.creepDirty=true;if(b.def.larva)b.larva=Math.max(b.larva,1);
       if(b.side===ME){toast(`${b.def.name} 완성`,'good');sfx('done');}}
     return;}
@@ -1673,11 +1740,11 @@ function updBld(b,dt){
     if(b.hp<=0){kill(b,null);return;}}
   if(b.fly){flyStep(b,dt);return;}
   if(b.def.addon&&!b.parent)return;
-  if(b.def.energy)b.en=(b.side===G.cheatSide&&CHT('energy'))?200:Math.min(200,b.en+.5625*dt);
+  if(b.def.energy)b.en=(b.side===G.cheatSide&&CHT('energy'))?200:Math.min(200,b.en+.75*dt);
   if(fox&&!powered(b))return;
   if(b.kind==='batt')battTick(b,dt);
-  if(b.def.larva&&b.larva<3){b.larvaT+=dt*bm;if(b.larvaT>=9){b.larvaT=0;b.larva++;}}
-  if(b.queue.length){const q=b.queue[0];q.t+=dt*bm;if(q.t>=itemTime(b,q)){b.queue.shift();
+  if(b.def.larva&&b.larva<3){b.larvaT+=dt*bm*SPD('prod');if(b.larvaT>=LARVA_T){b.larvaT=0;b.larva++;}}
+  if(b.queue.length){const q=b.queue[0];q.t+=dt*bm*SPD(q.bm?'bld':'prod');if(q.t>=itemTime(b,q)){b.queue.shift();
     if(q.r){G.side[b.side].up[q.r]=q.lv+1;if(b.side===ME){const R=RES[q.r];notify(`${resName(R,q.lv)} ${R.lv>1&&!R.lvName?'강화':'연구'} 완료`,R.lv>1?'강화 완료':'연구 완료','good');}}
     else if(q.nk){b.armed=true;if(b.side===ME)notify('초대형 미사일이 준비됐어요. 저격냥으로 쏠 수 있어요(N).','미사일 준비 완료','good');}
     else if(q.bm)finishBldMorph(b,q.bm);
@@ -1766,7 +1833,7 @@ function fire(src,t,w){
   const p={x:src.x,y:src.y-(src.type==='bld'?14:6)-(isAir(src)?AIRH:0),t:w.proj==='shell'&&w.splash?null:t,tx:t.x,ty:t.y,dmg:w.dmg,dt:w.dt,splash:w.splash||0,side:src.side,kind:w.proj,src,ff:!!src.siege,
     sp:{bullet:950,grenade:420,shell:w.splash?300:420,laser:1100,missile:440,spine:520,glaive:380,spore:420,spore2:300,acid:260,yamato:520,plasma:520,psi:900,scarab:170}[w.proj]||500,bounce:w.proj==='glaive'?[t]:null,bn:0,acid:!!(src.def&&src.def.acid)};
   const tAir=isAir(t),sAir=isAir(src);p.air=tAir;
-  if(!tAir&&!sAir&&elevOf(src)<elevOf(t)&&R()<.4)p.miss=true;
+  if(!tAir&&!sAir&&elevOf(src)<elevOf(t)&&R()<.47)p.miss=true;
   if(p.miss&&p.splash){p.tx+=(R()<.5?-1:1)*(30+R()*20);p.ty+=(R()<.5?-1:1)*(30+R()*20);}
   p.sx=p.x;p.sy=p.y;p.d0=hyp(p.tx-p.x,p.ty-p.y)||1;G.proj.push(p);
 }
@@ -1949,7 +2016,7 @@ function aiThink(side){
   workers.forEach(w=>{if(w.order.type==='idle'){const n=nearestRes(w.x,w.y,1400);if(n)orderGather(w,n);}});
   B('ref').filter(r=>r.done&&r.geyser&&r.geyser.amount>0).forEach(r=>{const on=workers.filter(w=>w.order.type==='gather'&&w.order.node===r).length;
     if(on<3){const cand=workers.filter(w=>w.order.type==='gather'&&w.order.node&&w.order.node.type==='res').sort((a,b)=>hyp(a.x-r.x,a.y-r.y)-hyp(b.x-r.x,b.y-r.y));for(let i=0;i<3-on&&i<cand.length;i++)orderGather(cand[i],r);}});
-  const X={D,S,f,A,foe:foeS,side,mine,B,hqs,home,workers,army,sup,save:false};
+  const dk=S.diff||G.diff;const X={easy:dk==='easy'||dk==='vEasy',hard:dk==='hard',D,S,f,A,foe:foeS,side,mine,B,hqs,home,workers,army,sup,save:false};
   X.doneN=k=>B(k).filter(b=>b.done).length;
   X.pending=k=>B(k).some(b=>!b.done)||workers.some(w=>w.order.type==='build'&&w.order.bk===k);
   X.want=(cond,k)=>{if(X.save||!cond)return;if(workers.some(w=>w.order.type==='build'&&w.order.bk===k))return;const d=BLD[f][k];if(d.req&&!hasReq(side,d.req))return;if(S.res<d.cost||S.gas<d.gas){X.save=true;return;}
@@ -1977,17 +2044,17 @@ function aiCat(X){
   want(S.res>420&&B('bar').every(b=>b.done)&&B('bar').length<D.maxBar,'bar');
   want(doneN('bar')>0&&B('aca').length===0&&G.t>Math.min(D.engT,400)*.8,'aca');
   want(doneN('fac')>0&&B('arm').length===0&&(S.foeAir||G.t>D.airT),'arm');
-  want(doneN('air')>0&&B('sci').length===0&&G.diff!=='easy'&&G.t>D.airT+120,'sci');
+  want(doneN('air')>0&&B('sci').length===0&&!X.easy&&G.t>D.airT+120,'sci');
   want(doneN('sci')>0&&S.res>500&&B('air').length<2,'air');
   if(!X.save){
     if(D.stim)B('aca').filter(b=>b.done&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.u238&&!researching(side,'u238'))research(b,'u238',true);});
     B('plab').filter(b=>b.done&&b.parent&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.yamato&&!researching(side,'yamato'))research(b,'yamato',true);});
-    if(G.diff==='hard')B('sci').filter(b=>b.done&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.emp&&G.side[X.foe].fac==='fox')research(b,'emp',true);});
-    if(G.diff!=='easy')B('aca').filter(b=>b.done&&!b.queue.length&&S.up.stim&&S.up.u238).slice(0,1).forEach(b=>{if(!S.up.restore)research(b,'restore',true);});
+    if(X.hard)B('sci').filter(b=>b.done&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.emp&&G.side[X.foe].fac==='fox')research(b,'emp',true);else if(!S.up.irrR&&G.side[X.foe].fac==='dog')research(b,'irrR',true);});
+    if(!X.easy)B('aca').filter(b=>b.done&&!b.queue.length&&S.up.stim&&S.up.u238).slice(0,1).forEach(b=>{if(!S.up.restore)research(b,'restore',true);});
     if(D.upg)B('arm').filter(b=>b.done&&!b.queue.length).slice(0,1).forEach(b=>{const r=S.up.vatk<=S.up.varm?'vatk':'varm';if(!research(b,r,true))research(b,r==='vatk'?'varm':'vatk',true);});
     if(D.stim)B('aca').filter(b=>b.done&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.stim&&!researching(side,'stim'))research(b,'stim',true);});
     if(D.siege)B('mshop').filter(b=>b.done&&b.parent&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.siege&&!researching(side,'siege'))research(b,'siege',true);else if(!S.up.charon&&S.foeAir&&hasDone(side,'arm'))research(b,'charon',true);});
-    if(G.diff==='hard')B('ctower').filter(b=>b.done&&b.parent&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.cloak&&!researching(side,'cloak'))research(b,'cloak',true);});
+    if(X.hard)B('ctower').filter(b=>b.done&&b.parent&&!b.queue.length).slice(0,1).forEach(b=>{if(!S.up.cloak&&!researching(side,'cloak'))research(b,'cloak',true);});
     const adn=(k,a)=>B(k).filter(b=>b.done&&!b.addon&&!b.queue.length&&!b.fly).slice(0,1).forEach(b=>buildAddon(b,a,true));
     if(hasDone(side,'aca'))adn('hq','comsat');adn('fac','mshop');adn('air','ctower');adn('sci','plab');
     if(D.upg)B('eng').filter(b=>b.done&&!b.queue.length).forEach(b=>{const r=S.up.atk<=S.up.arm?'atk':'arm';if(!research(b,r,true))research(b,r==='atk'?'arm':'atk',true);});
@@ -2009,23 +2076,23 @@ function aiDog(X){
   const eggs=mine.filter(e=>e.kind==='egg'),eggK=k=>eggs.filter(e=>e.morph.k===k).length;
   const foeSup=G.ents.filter(e=>!e.dead&&foe(side,e.side)&&isArmy(e)).reduce((a,u)=>a+u.def.sup,0);
   const mySup=X.army.reduce((a,u)=>a+u.def.sup,0)+eggs.filter(e=>e.morph.k!=='worker'&&e.morph.k!=='ovl').reduce((a,e)=>a+UNIT.dog[e.morph.k].sup*(UNIT.dog[e.morph.k].pair?2:1),0);
-  const danger=G.t>150&&mySup<foeSup*1.1+2;X.danger=danger;
+  const danger=!X.easy&&G.t>150&&mySup<foeSup*1.1+2;X.danger=danger;
   const want=(c,k)=>{if(danger&&k!=='col'&&!(k==='hq'&&S.res>500)&&!(k==='den'&&S.gas>=100))return;X.want(c,k);};
   const larvaHq=()=>hqs.filter(h=>h.done&&h.larva>0).sort((a,b)=>b.larva-a.larva)[0];
   if(sup.cap<200&&sup.cap-sup.used<=(sup.used>60?14:sup.used>24?8:3)&&eggK('ovl')<(sup.used>60?3:sup.used>24?2:1)){const h=larvaHq();if(S.res<100)X.save=true;else if(h)morph(h,'ovl',true);}
   want(B('bar').length===0&&workers.length>=10,'bar');
   want(B('bar').length>0&&B('ref').length<Math.min(2,Math.max(1,doneN('hq')))&&workers.length>=11,'ref');
   want(B('bar').length>0&&hqs.length<2&&!X.pending('hq')&&(S.res>320||G.t>D.expT*.6),'hq');
-  want(hqs.length<(G.diff==='easy'?3:S.res>600?5:3)&&G.t>140&&S.res>(hqs.length<3?300:500)&&(!X.pending('hq')||S.res>700),'hq');
+  want(hqs.length<(X.easy?3:S.res>600?5:3)&&G.t>140&&S.res>(hqs.length<3?300:500)&&(!X.pending('hq')||S.res>700),'hq');
   want(doneN('bar')>0&&B('den').length===0&&(G.t>Math.min(D.facT,600)*.8||S.gas>=100&&G.t>150),'den');
   want(doneN('bar')>0&&B('eng').length===0&&(G.t>D.engT||S.foeAir||S.foeHidden),'eng');
   const spN=doneN('eng')>0&&(S.foeAir||S.foeHidden)?2:0;
   want(doneN('bar')>0&&B('tow').length+B('tow2').length+B('col').length<D.towers+spN,'col');
   B('col').filter(b=>b.done&&!b.queue.length).forEach(b=>{const k=B('tow2').length<spN&&hasDone(side,'eng')?'tow2':'tow';startBldMorph(b,k,true);});
   want(S.up.lair>0&&B('spire').length===0&&G.t>D.airT*.85,'spire');
-  want(S.up.lair>0&&B('qnest').length===0&&G.diff!=='easy'&&G.t>D.airT,'qnest');
+  want(S.up.lair>0&&B('qnest').length===0&&!X.easy&&G.t>D.airT,'qnest');
   want(S.up.lair>1&&B('ucav').length===0,'ucav');
-  want(S.up.lair>1&&B('dmound').length===0&&G.diff==='hard','dmound');
+  want(S.up.lair>1&&B('dmound').length===0&&X.hard,'dmound');
   want(S.up.lair>1&&B('eng').length<2&&S.res>300,'eng');
   if(!X.save){
     const freeHq=hqs.find(h=>h.done&&!h.queue.length);
@@ -2084,16 +2151,16 @@ function aiFox(X){
   want(doneN('core')>0&&B('robo').length===0&&G.t>D.facT+60,'robo');
   want(doneN('robo')>0&&B('obsy').length===0&&(S.foeHidden||G.t>D.airT),'obsy');
   want(doneN('robo')>0&&B('bay').length===0&&G.t>D.airT*.9,'bay');
-  want(doneN('cit')>0&&B('arch').length===0&&G.diff!=='easy'&&G.t>D.airT,'arch');
+  want(doneN('cit')>0&&B('arch').length===0&&!X.easy&&G.t>D.airT,'arch');
   want(doneN('core')>0&&B('gate2').length===0&&G.t>D.airT,'gate2');
-  want(doneN('gate2')>0&&B('beacon').length===0&&G.diff!=='easy'&&G.t>D.airT+150,'beacon');
+  want(doneN('gate2')>0&&B('beacon').length===0&&!X.easy&&G.t>D.airT+150,'beacon');
   want(G.t>D.expT&&hqs.length<2&&!pending('hq'),'hq');
   want(S.res>350&&B('bar').every(b=>b.done)&&B('bar').length<D.maxBar+2,'bar');
   if(!X.save){
     const r1=(k,r)=>B(k).filter(b=>b.done&&!b.queue.length&&powered(b)).slice(0,1).forEach(b=>{if(!S.up[r]&&!researching(side,r))research(b,r,true);});
     if(D.stim){r1('core','sing');r1('cit','leg');}r1('arch','storm');
     X.army.filter(u=>u.def.ammo&&(u.ammo+u.amQ)<ammoCap(u)&&u.amQ<2).forEach(u=>buyAmmo(u,true));
-    if(G.diff==='hard'){r1('beacon','ccap');r1('bay','rcap');}
+    if(X.hard){r1('beacon','ccap');r1('bay','rcap');}
     if(D.upg){B('eng').filter(b=>b.done&&!b.queue.length&&powered(b)).forEach(b=>{const r=S.up.atk<=S.up.arm?'atk':'arm';if(!research(b,r,true))research(b,r==='atk'?'arm':'atk',true);});
       B('core').filter(b=>b.done&&!b.queue.length&&powered(b)&&S.up.sing&&hasDone(side,'beacon')).slice(0,1).forEach(b=>research(b,'vatk',true));}
     B('bar').filter(b=>b.done&&b.queue.length<2&&powered(b)).forEach(b=>{const x=R(),core=hasDone(side,'core'),arch=hasDone(side,'arch');
@@ -2173,7 +2240,7 @@ const ABIL={
   jcloak:{name:'은폐',hk:'C',en:25,tgt:'self',icon:'cloak',res:'cloak',desc:'에너지 25를 쓰고, 은폐하는 동안 에너지가 계속 줄어요. 탐지기가 없으면 적이 보지도 공격하지도 못해요.'},
   lock:{name:'락다운',hk:'L',en:100,tgt:'unit',range:260,res:'lock',icon:'lock',desc:'적 기계 유닛 하나를 20초 동안 완전히 멈춰요.',ok:(c,t)=>foe(c.side,t.side)&&t.type==='unit'&&t.def.mech&&!t.def.mineU,bad:'적 기계 유닛을 골라야 해요.'},
   matrix:{name:'방어막',hk:'D',en:100,tgt:'unit',range:320,icon:'armup',desc:'우리 유닛 하나에 30초 동안 피해 250을 막는 방어막을 씌워요.',ok:(c,t)=>t.side===c.side&&t.type==='unit',bad:'우리 유닛을 골라야 해요.'},
-  irr:{name:'방사능',hk:'I',en:75,tgt:'unit',range:320,icon:'irr',desc:'생체 유닛을 30초 동안 방사능으로 태워요. 가까이 있는 생체 유닛도 함께 피해를 받아요.',ok:(c,t)=>t.type==='unit'&&isBio(t),bad:'생체 유닛을 골라야 해요.'},
+  irr:{name:'방사능',hk:'I',en:75,tgt:'unit',range:320,res:'irrR',icon:'irr',desc:'생체 유닛을 30초 동안 방사능으로 태워요. 가까이 있는 생체 유닛도 함께 피해를 받아요.',ok:(c,t)=>t.type==='unit'&&isBio(t),bad:'생체 유닛을 골라야 해요.'},
   yamato:{name:'야마토포',hk:'Y',en:150,tgt:'unit',range:330,res:'yamato',icon:'yamato',desc:'적 하나에게 피해 260의 엄청난 포를 쏴요.',ok:(c,t)=>foe(c.side,t.side),bad:'적을 골라야 해요.'},
   mine:{name:'거미 지뢰',hk:'I',tgt:'point',range:30,res:'mines',icon:'mine',desc:'고른 곳에 거미 지뢰를 심어요. 바이크냥 하나에 3개까지 심을 수 있어요.'},
   ensnare:{name:'끈적이 덫',hk:'E',en:75,tgt:'point',range:300,icon:'ensnare',desc:'고른 곳 주변의 적을 25초 동안 느리게 만들어요.'},
@@ -2223,7 +2290,7 @@ function cast(u,a,t,x,y){
   else if(a==='brood'){t.hp=0;kill(t,u);for(let i=0;i<2;i++){const b=addUnit(S,'brood',t.x+(i?10:-10),t.y);b.lifeT=UNIT[G.side[S].fac].brood?18:18;setOrder(b,{type:'amove',x:t.x,y:t.y});}sfxAt('hatch',t.x,t.y);}
   else if(a==='swarm'){G.fields.push({k:'swarm',x,y,r:110,t:25,max:25,side:S});sfxAt('burrow',x,y);}
   else if(a==='plague'){for(const e of G.ents){if(e.dead||!foe(S,e.side)||(e.type!=='unit'&&e.type!=='bld')||e.inside)continue;if(distPt(x,y,e)<=70)e.plagueT=25;}G.fields.push({k:'plague',x,y,r:70,t:1.5,max:1.5,side:S});sfxAt('splat',x,y);}
-  else if(a==='consume'){t.hp=0;t.consumed=true;kill(t,null);u.en=Math.min(200,u.en+50);sfxAt('splat',t.x,t.y);}
+  else if(a==='consume'){t.hp=0;t.consumed=true;kill(t,null);u.en=Math.min(enMax(u),u.en+50);sfxAt('splat',t.x,t.y);}
   else if(a==='unload'){unloadAll(u,x,y);}
   else if(a==='storm'){G.fields.push({k:'storm',x,y,r:90,t:4,max:4,side:S});sfxAt('scan',x,y);}
   else castBW(u,a,t,x,y);
@@ -2328,7 +2395,7 @@ function mergeStep(u,o,dt){
   if(d>26){steer(u,(u.x+p.x)/2,(u.y+p.y)/2,null,dt);return;}
   if(u.id>p.id)return;
   const x=(u.x+p.x)/2,y=(u.y+p.y)/2;u.dead=true;p.dead=true;u.consumed=p.consumed=true;
-  const a=addUnit(u.side,o.into||'archon',x,y,u.fac);a.sh=a.maxsh*.5;G.side[u.side].st.made++;puff(x,y,'#7ff5ff',14,16);if(u.side===ME)sfxAt('scan',x,y);
+  const a=addUnit(u.side,o.into||'archon',x,y,u.fac);a.sh=a.maxsh*.5;a.mergeT=12;G.side[u.side].st.made++;puff(x,y,'#7ff5ff',14,16);if(u.side===ME)sfxAt('scan',x,y);
 }
 function fieldTick(dt){
   if(!G.fields)G.fields=[];
@@ -2364,10 +2431,10 @@ ABIL.ensnare.res='ensR';ABIL.brood.res='broodR';ABIL.plague.res='plagueR';ABIL.c
 const AB_R={storm:90,ensnare:90,plague:70,swarm:110,emp:80,mael:60,recall:70,stasis:70,dweb:70,nuke:130};
 
 function isAir(e){return e.type==='unit'?!!e.def.flying:!!e.fly;}
-function stunned(e){return e.lockT>0||e.maelT>0||e.stasisT>0;}
+function stunned(e){return e.lockT>0||e.maelT>0||e.stasisT>0||e.mergeT>0;}
 function inWeb(e){if(isAir(e))return false;for(const f of G.fields)if(f.k==='web'&&distPt(f.x,f.y,e)<=f.r)return true;return false;}
 function sightOf(e){
-  if(e.type==='bld'&&!e.done)return 140;let s=e.def.sight;if(e.flare)return 40;
+  if(e.type==='bld'&&!e.done)return 140;let s=e.def.sight;if(e.flare)return 40;if(e.type==='unit'&&e.kind==='ghost'&&G.side[e.side].up.ocular)s+=75;
   if(e.type==='unit'){const U=G.side[e.side].up;
     if(e.kind==='ovl'&&U.antenna)s+=100;else if(e.kind==='scout'&&U.apial)s+=80;else if(e.kind==='obs'&&U.obssens)s+=80;}
   return s;}
@@ -2441,7 +2508,7 @@ function buyAmmo(u,quiet){
   if((u.amQ||0)>=5){if(me)notify('대기열이 가득 찼어요.',null,'bad');return false;}
   if(S.res<d.acost){if(me)lackMsg(u.side,'min');return false;}
   S.res-=d.acost;u.amQ=(u.amQ||0)+1;if(me)sfx('cmd');return true;}
-function ammoTick(u,dt){if(!(u.amQ>0))return;u.amT=(u.amT||0)+dt*(u.side===G.cheatSide&&CHT('fast')?10:1);if(u.amT>=u.def.abt){u.amT=0;u.amQ--;u.ammo=(u.ammo||0)+1;}}
+function ammoTick(u,dt){if(!(u.amQ>0))return;u.amT=(u.amT||0)+dt*SPD('prod')*(u.side===G.cheatSide&&CHT('fast')?10:1);if(u.amT>=u.def.abt){u.amT=0;u.amQ--;u.ammo=(u.ammo||0)+1;}}
 // 보호막 충전소
 function battTick(b,dt){
   if(!(b.en>1))return;let give=40*dt;
@@ -2468,7 +2535,7 @@ function landOrder(b,cx,cy){if(!b.fly)return;cx|=0;cy|=0;b.landAt={cx,cy};b.tx=(
 function bldH(b){if(b.liftT>0)return (1-b.liftT)*AIRH;if(b.landT>0)return b.landT*AIRH;return b.fly?AIRH:0;}
 function flyStep(b,dt){
   if(b.liftT>0){b.liftT-=dt;return;}
-  const d=hyp(b.tx-b.x,b.ty-b.y),sp=55*dt;
+  const d=hyp(b.tx-b.x,b.ty-b.y),sp=55*SPD('move')*dt;
   if(d>1){const s=Math.min(d,sp);b.x+=(b.tx-b.x)/d*s;b.y+=(b.ty-b.y)/d*s;b.x=clamp(b.x,b.w*CELL/2,MW-b.w*CELL/2);b.y=clamp(b.y,b.h*CELL/2+AIRH,MH-b.h*CELL/2);b.cx=b.x/CELL-b.w/2;b.cy=b.y/CELL-b.h/2;return;}
   if(b.landAt){const {cx,cy}=b.landAt;b.landAt=null;
     if(canPlace(b.side,b.kind,cx,cy,0)){b.cx=cx;b.cy=cy;b.x=(cx+b.w/2)*CELL;b.y=(cy+b.h/2)*CELL;b.fly=false;b.landT=1;setGrid(b,b);pushOut(b,null);tryAttach(b);sfxAt('siege',b.x,b.y);}
@@ -2495,7 +2562,7 @@ function nydusStep(u,o,dt){
 }
 const BW_ORDERS={nuking:nukeStep,nydus:nydusStep};
 // 상태 효과 추가
-function statusTickBW(e,dt){if(e.maelT>0)e.maelT-=dt;if(e.stasisT>0)e.stasisT-=dt;}
+function statusTickBW(e,dt){if(e.maelT>0)e.maelT-=dt;if(e.mergeT>0)e.mergeT-=dt*SPD('prod');if(e.stasisT>0)e.stasisT-=dt;}
 // 카메라 위치 저장 (F2~F4)
 const CAMPOS={};
 
@@ -2567,7 +2634,7 @@ function scrollCam(dt){
 /* ========== 화면 그리기 ========== */
 function canSee(e){if(e.side===ME)return !e.inside;if(e.type==='bld'&&!e.fly)return e.seen;if(e.type==='res'||e.type==='gas')return VIS()[e.cy*GW+e.cx]>0;if(e.inside)return false;
   const i=cellOf(e);if(VIS()[i]!==2)return false;if(e.bur&&!DET()[i])return false;return true;}
-function alphaOf(e){if(!isHidden(e))return 1;if(e.side===ME)return .5;return DET()[cellOf(e)]?.6:.12;}
+function alphaOf(e){if(e.mergeT>0)return .35+.4*(1-e.mergeT/12);if(!isHidden(e))return 1;if(e.side===ME)return .5;return DET()[cellOf(e)]?.6:.12;}
 function drawStatus(u){const c=ctx,y=u.y-(u.def.flying?AIRH:0);
   if(u.stasisT>0){c.fillStyle='rgba(143,227,255,.35)';c.strokeStyle='rgba(220,250,255,.9)';c.lineWidth=1.5;for(let i=0;i<5;i++){const a=i*TAU/5+.3,px=u.x+Math.cos(a)*u.r*.8,py=y+Math.sin(a)*u.r*.6;c.beginPath();c.moveTo(px,py-u.r*.7);c.lineTo(px+5,py);c.lineTo(px,py+u.r*.3);c.lineTo(px-5,py);c.closePath();c.fill();c.stroke();}}
   if(u.maelT>0){c.strokeStyle=`rgba(197,139,255,${.5+.3*Math.sin(G.t*10)})`;c.lineWidth=2;c.beginPath();c.arc(u.x,y,u.r+4,G.t*3,G.t*3+4);c.stroke();}
@@ -2659,7 +2726,7 @@ function render(){
   ctx.globalAlpha=1;
   const bar=(x,y,w,f,col)=>{ctx.fillStyle='rgba(5,7,10,.85)';ctx.fillRect(x-1,y-1,w+2,6);ctx.fillStyle=col||(f>.6?'#4fd18b':f>.3?'#f2b544':'#ff5d5d');ctx.fillRect(x,y,w*f,4);};
   for(const u of units)if(selSet.has(u)||u.hp<u.maxhp||(u.maxsh&&u.sh<u.maxsh)){if(u.side!==ME&&alphaOf(u)<.3)continue;const w=Math.max(22,u.r*2.2),by=u.y-u.r-(u.def.flying?AIRH+u.r*1.2:u.bur?-u.r*.1:14);bar(u.x-w/2,by,w,u.hp/u.maxhp);if(u.maxsh)bar(u.x-w/2,by-6,w,u.sh/u.maxsh,'#5fc8ff');
-    if(selSet.has(u)&&u.def.energy&&u.side===ME)bar(u.x-w/2,by+6,w,u.en/200,'#b07cff');}
+    if(selSet.has(u)&&u.def.energy&&u.side===ME)bar(u.x-w/2,by+6,w,u.en/enMax(u),'#b07cff');}
   for(const b of blds)if(selSet.has(b)||b.hp<b.maxhp||(b.maxsh&&b.sh<b.maxsh)){const yy=b.cy*CELL-bldH(b);bar(b.cx*CELL+7,yy-6,b.w*CELL-14,b.hp/b.maxhp);if(b.maxsh)bar(b.cx*CELL+7,yy-12,b.w*CELL-14,b.sh/b.maxsh,'#5fc8ff');if(selSet.has(b)&&b.def.energy&&b.side===ME)bar(b.cx*CELL+7,yy,b.w*CELL-14,b.en/200,'#b07cff');}
   for(const g of G.ents)if(g.type==='gas'&&selSet.has(g))bar(g.cx*CELL+7,g.cy*CELL-6,g.w*CELL-14,g.amount/5000,'#55e39a');
   for(const b of G.sel.filter(e=>e.type==='bld'&&e.side===ME&&e.rally)){const r=b.rally;ctx.setLineDash([6,6]);ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(r.x,r.y);ctx.stroke();ctx.setLineDash([]);
@@ -2977,7 +3044,7 @@ CMDS.addEventListener('pointerout',e=>{if(e.pointerType==='mouse'&&!e.relatedTar
 
 /* ========== 정보 패널 ========== */
 const hpCol=f=>f>.6?'var(--good)':f>.3?'var(--gold)':'var(--bad)';
-function statusTags(e){const t=[];if(e.lockT>0)t.push('락다운');if(e.matrix>0)t.push(`방어막 ${Math.ceil(e.matrix)}`);if(e.irrT>0)t.push('방사능');if(e.plagueT>0)t.push('역병');if(e.ensT>0)t.push('끈적이 덫');if(e.acid>0)t.push(`산성 ${e.acid}`);if(e.arb)t.push('중재여우 은폐');if(e.stasisT>0)t.push(`정지장 ${Math.ceil(e.stasisT)}초`);if(e.maelT>0)t.push('마엘스트롬');if(e.para&&(e.para===ME||e.side===ME))t.push('기생충');if(e.flare)t.push('섬광탄');if(e.hallu&&e.side===ME)t.push('환영');if(e.fly)t.push('떠 있음');if(e.armed)t.push('미사일 준비됨');
+function statusTags(e){const t=[];if(e.lockT>0)t.push('락다운');if(e.matrix>0)t.push(`방어막 ${Math.ceil(e.matrix)}`);if(e.irrT>0)t.push('방사능');if(e.plagueT>0)t.push('역병');if(e.ensT>0)t.push('끈적이 덫');if(e.acid>0)t.push(`산성 ${e.acid}`);if(e.arb)t.push('중재여우 은폐');if(e.stasisT>0)t.push(`정지장 ${Math.ceil(e.stasisT)}초`);if(e.mergeT>0)t.push(`합체 중 ${Math.ceil(e.mergeT)}초`);if(e.maelT>0)t.push('마엘스트롬');if(e.para&&(e.para===ME||e.side===ME))t.push('기생충');if(e.flare)t.push('섬광탄');if(e.hallu&&e.side===ME)t.push('환영');if(e.fly)t.push('떠 있음');if(e.armed)t.push('미사일 준비됨');
   if(e.def.ammo&&e.side===ME)t.push(`${e.def.ammo==='icpt'?'요격기':'스캐럽'} ${e.ammo}/${ammoCap(e)}${e.amQ?` (+${e.amQ} 만드는 중)`:''}`);if(e.def.addon&&e.side===ME)t.push(e.parent?'본 건물에 연결됨':'떨어져 있음 — 쓸 수 없어요');if(e.kind==='nydus'&&e.side===ME)t.push(e.link?(e.link.done?'출구와 연결됨':'출구 만드는 중'):'출구 없음 (E)');if(e.kc)t.push(`처치 ${e.kc}`);
   if(e.cargo&&e.cargo.length)t.push(`탑승 ${e.cargo.length}명 (${cargoUsed(e)}/${e.def.cargo}칸)`);else if(e.cargo)t.push(`빈자리 ${e.def.cargo}칸`);if(e.def.mines&&e.side===ME)t.push(`거미 지뢰 ${e.mines}개`);if(e.type==='bld'&&e.fac==='fox'&&!e.def.nopower&&!powered(e))t.push('전력 끊김');
   return t.length?`<div class="st" style="color:var(--gas)">${t.join(' · ')}</div>`:'';}
@@ -2988,7 +3055,7 @@ function renderInfo(){
     if(e.type==='res'){INFO.innerHTML=`<div class="one"><img class="por" src="${ICON.min}" alt=""><div class="meta"><div class="nm">광석</div><div class="ds">남은 광석 <b style="color:var(--min)">${e.amount}</b></div><div class="st">일꾼을 선택하고 광석을 클릭하면 알아서 계속 캐요. 한 번 캐는 데 2초, 기지에 가져갈 때마다 8씩 늘어요.</div></div></div>`;return;}
     if(e.type==='gas'){INFO.innerHTML=`<div class="one"><img class="por" src="${ICON.gas}" alt=""><div class="meta"><div class="nm">가스 간헐천</div><div class="ds">남은 가스 <b style="color:var(--gas)">${e.amount}</b></div><div class="st">일꾼을 선택하고 간헐천을 클릭하면 광석 75로 가스 건물을 지어요. 다 지은 뒤 일꾼을 보내면 가스를 모아요.</div></div></div>`;return;}
     const own=e.side===ME,f=e.fac,hpF=e.hp/e.maxhp,up=G.side[e.side].up;let extra='';
-    const enBar=v=>`<div class="hpbar en"><i style="width:${v/2}%"></i></div><div class="hpt">에너지 ${Math.floor(v)} / 200</div>`;
+    const enBar=v=>{const mx=e.type==='unit'?enMax(e):200;return `<div class="hpbar en"><i style="width:${v/mx*100}%"></i></div><div class="hpt">에너지 ${Math.floor(v)} / ${mx}</div>`;};
     let icon=ICON[f][e.kind];if(e.type==='bld'&&e.kind==='hq'&&f==='dog'&&up.lair)icon=up.lair>1?ICON[f].hive:ICON[f].lair;
     let name=e.def.name;if(e.type==='bld'&&e.kind==='hq'&&f==='dog'&&up.lair)name=up.lair>1?'멍멍 군락':'멍멍 둥지';
     if(e.type==='unit'){const d=e.def;
@@ -3004,7 +3071,7 @@ function renderInfo(){
       else{
         if(own&&(e.def.trains||e.def.res||e.kind==='silo'||e.def.morphs)){let q='';const qn=e.def.larva?(e.queue.length?5:0):5;for(let i=0;i<qn;i++){const it=e.queue[i];if(it){const p=i===0?it.t/itemTime(e,it)*100:0;const pic=it.r?SVGI[RES[it.r].icon]:it.nk?SVGI.nuke:`<img src="${ICON[f][it.bm||it.k]}" alt="">`;q+=`<button class="qs" type="button" data-q="${i}" title="눌러서 취소">${pic}<i style="width:${p}%"></i></button>`;}else q+=`<div class="qs emp"></div>`;}
           if(q)extra+=`<div class="st">${e.queue.length?'대기열 (누르면 취소)':''}</div><div class="q">${q}</div>`;}
-        if(e.def.larva&&own)extra+=`<div class="ds">애벌레 <b style="color:var(--dog)">${e.larva}</b> / 3 ${e.larva<3?`<span class="st">· 다음 애벌레 ${Math.ceil(9-e.larvaT)}초</span>`:''}</div><div class="st">아래 버튼으로 애벌레를 변태시켜요. 알은 부화장 옆에 생겨요.</div>`;
+        if(e.def.larva&&own)extra+=`<div class="ds">애벌레 <b style="color:var(--dog)">${e.larva}</b> / 3 ${e.larva<3?`<span class="st">· 다음 애벌레 ${Math.ceil(LARVA_T-e.larvaT)}초</span>`:''}</div><div class="st">아래 버튼으로 애벌레를 변태시켜요. 알은 부화장 옆에 생겨요.</div>`;
         if(e.def.energy&&own)extra+=enBar(e.en);
         if(e.kind==='ref'&&e.geyser)extra+=`<div class="ds">남은 가스 <b style="color:var(--gas)">${e.geyser.amount}</b></div><div class="st">일꾼 세 명을 보내면 가장 빨라요.</div>`;
         if(e.kind==='eng'&&own)extra+=`<div class="st">${f==='dog'?`근접 ${up.atk}단계 · 원거리 ${up.mis}단계 · 갑피 ${up.arm}단계`:`공격력 ${up.atk}단계 · 방어력 ${up.arm}단계`}</div>`;
@@ -3052,7 +3119,7 @@ function offlineCfg(){
   const n=choice.n||2,map=choice.map||'m2',team=n===4&&choice.mode==='team';
   const players=[{fac:choice.f,team:0,name:($('#nameIn').value||'').trim().slice(0,8)||'나',ai:false}];
   for(let i=1;i<n;i++){let ef=choice.e;if(!ef||ef==='rand')ef=FACS[(Math.random()*3)|0];players.push({fac:ef,team:team?(i===1?0:1):i,name:`컴퓨터 ${i}`,ai:true,diff:choice.d});}
-  return {map:n>2?'m4':map,seed:(Math.random()*2147483647)|0,diff:choice.d,players};
+  return {speed:{...choice.spd},map:n>2?'m4':map,seed:(Math.random()*2147483647)|0,diff:choice.d,players};
 }
 function startGame(o){
   audioInit();const cfg=o&&o.online?o:null;
@@ -3079,6 +3146,14 @@ let idleIdx=0;
 $('#bIdle').addEventListener('click',()=>{if(!G)return;const w=G.ents.filter(e=>e.side===ME&&e.kind==='worker'&&e.order.type==='idle'&&!e.bur);if(!w.length){toast('쉬고 있는 일꾼이 없어요.');return;}const u=w[idleIdx++%w.length];G.sel=[u];centerCam(u.x,u.y);selectSound();updPanel();});
 document.querySelectorAll('.fac').forEach(b=>b.addEventListener('click',()=>pickFac(b.dataset.f)));
 document.querySelectorAll('#enemySeg button').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;choice.e=b.dataset.e;document.querySelectorAll('#enemySeg button').forEach(x=>x.classList.toggle('on',x===b));}));
+const SPD_OPTS=[1,1.5,2,2.5,3];
+function renderSpd(){const lock=!!(LOBBY.link&&!LOBBY.host);const src=lock&&LOBBY.room&&LOBBY.room.settings&&LOBBY.room.settings.speed?parseSpd(LOBBY.room.settings.speed):choice.spd;
+  document.querySelectorAll('.sseg').forEach(sg=>{const k=sg.dataset.k;sg.innerHTML=SPD_OPTS.map(v=>`<button type="button" data-v="${v}" class="${src[k]===v?'on':''}"${lock?' disabled':''}>${v}배</button>`).join('');});
+  $('#spdNote').textContent=lock?'(방장이 정한 속도예요)':playMode==='online'?'(방장이 고른 속도로 모두 플레이해요)':'';}
+function parseSpd(s){const a=String(s).split(',').map(Number);return {bld:a[0]||1,prod:a[1]||1,move:a[2]||1};}
+function spdStr(o){return [o.bld,o.prod,o.move].join(',');}
+document.querySelectorAll('.sseg').forEach(sg=>sg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;choice.spd[sg.dataset.k]=+b.dataset.v;try{localStorage.setItem('nm_spd',JSON.stringify(choice.spd));}catch(err){}
+  if(LOBBY.link&&LOBBY.host&&LOBBY.room)LOBBY.link.set('settings',{...(LOBBY.room.settings||{map:'m4',mode:'ffa'}),speed:spdStr(choice.spd)});renderSpd();}));
 function syncAiOpts(){document.querySelectorAll('#numSeg button').forEach(x=>x.classList.toggle('on',+x.dataset.n===choice.n));if(choice.n>2)choice.map='m4';document.querySelectorAll('#mapSeg button').forEach(x=>{x.classList.toggle('on',x.dataset.v===choice.map);x.disabled=choice.n>2&&x.dataset.v==='m2';});
   $('#teamWrap').hidden=choice.n!==4;document.querySelectorAll('#teamSeg button').forEach(x=>x.classList.toggle('on',x.dataset.v===choice.mode));}
 document.querySelectorAll('#numSeg button').forEach(b=>b.addEventListener('click',()=>{choice.n=+b.dataset.n;syncAiOpts();}));
@@ -3261,7 +3336,7 @@ async function hostRoom(){
   lobbyBusy(true);lobbyMsg('방을 만드는 중…');
   try{
     let link=null,code='';
-    for(let i=0;i<5&&!link;i++){code=genCode();const l=await getLink(code);if(await l.create({settings:{map:ronSet.map,mode:ronSet.mode},slots:{s0:{name:myName(),fac:choice.f,ai:false,uid:LOBBY.uid}},status:'waiting',created:Date.now()}))link=l;else l.close();}
+    for(let i=0;i<5&&!link;i++){code=genCode();const l=await getLink(code);if(await l.create({settings:{map:ronSet.map,mode:ronSet.mode,speed:spdStr(choice.spd)},slots:{s0:{name:myName(),fac:choice.f,ai:false,uid:LOBBY.uid}},status:'waiting',created:Date.now()}))link=l;else l.close();}
     if(!link)throw new Error('code');
     LOBBY.link=link;LOBBY.slot=0;LOBBY.host=true;link.onLeaveRemove();
     $('#roomCode').textContent=code;$('#roomBox').hidden=false;lobbyMsg('친구에게 방 코드를 알려 주세요. 빈자리에 컴퓨터를 넣을 수도 있어요.');
@@ -3288,7 +3363,7 @@ function watchRoom(link){
   link.watch('',room=>{if(LOBBY.link!==link||LOBBY.starting)return;
     if(!room||!room.slots||!room.slots.s0){if(!LOBBY.host){lobbyMsg('방장이 방을 닫았어요.',true);leaveLobby(true);}return;}
     if(!LOBBY.host&&!room.slots[`s${LOBBY.slot}`]){lobbyMsg('방에서 나가졌어요.',true);leaveLobby(true);return;}
-    LOBBY.room=room;renderSlots();
+    LOBBY.room=room;renderSlots();renderSpd();
     if(room.match&&room.status==='playing')beginOnline(room.match);});
 }
 function roomMax(){const r=LOBBY.room;return MAPS[(r&&r.settings&&r.settings.map)||'m2'].max;}
@@ -3312,17 +3387,17 @@ $('#slots').addEventListener('click',e=>{const b=e.target.closest('button');if(!
   else if(b.dataset.rm!==undefined)L.set(`slots/s${b.dataset.rm}`,null);
   else if(b.dataset.cf!==undefined){const p=LOBBY.room.slots[`s${b.dataset.cf}`];L.set(`slots/s${b.dataset.cf}/fac`,FACS[(FACS.indexOf(p.fac)+1)%3]);}});
 document.querySelectorAll('#ronMap button').forEach(b=>b.addEventListener('click',()=>{if(!LOBBY.host||!LOBBY.link)return;const m=b.dataset.v;ronSet.map=m;
-  LOBBY.link.set('settings',{map:m,mode:m==='m2'?'ffa':(LOBBY.room&&LOBBY.room.settings&&LOBBY.room.settings.mode)||'ffa'});
+  LOBBY.link.set('settings',{map:m,mode:m==='m2'?'ffa':(LOBBY.room&&LOBBY.room.settings&&LOBBY.room.settings.mode)||'ffa',speed:spdStr(choice.spd)});
   if(m==='m2')for(let i=2;i<4;i++)if(LOBBY.room&&LOBBY.room.slots[`s${i}`])LOBBY.link.set(`slots/s${i}`,null);}));
-document.querySelectorAll('#ronMode button').forEach(b=>b.addEventListener('click',()=>{if(!LOBBY.host||!LOBBY.link)return;ronSet.mode=b.dataset.v;LOBBY.link.set('settings',{map:(LOBBY.room.settings||{}).map||'m4',mode:b.dataset.v});}));
+document.querySelectorAll('#ronMode button').forEach(b=>b.addEventListener('click',()=>{if(!LOBBY.host||!LOBBY.link)return;ronSet.mode=b.dataset.v;LOBBY.link.set('settings',{map:(LOBBY.room.settings||{}).map||'m4',mode:b.dataset.v,speed:spdStr(choice.spd)});}));
 $('#startOnline').addEventListener('click',()=>{if(!LOBBY.host||!LOBBY.link||!LOBBY.room)return;const r=LOBBY.room,st=r.settings||{map:'m2',mode:'ffa'},max=roomMax();
   const roster=[];for(let i=0;i<max;i++){const p=r.slots[`s${i}`];if(p)roster.push({name:p.name,fac:p.fac,ai:!!p.ai,uid:p.uid,team:st.mode==='team'?i%2:roster.length});}
   if(roster.length<2)return;const seed=(Math.random()*2147483647)|0;
-  LOBBY.link.set('match',{seed,start:Date.now(),roster:JSON.stringify({map:st.map,mode:st.mode,players:roster})});LOBBY.link.set('status','playing');});
+  LOBBY.link.set('match',{seed,start:Date.now(),roster:JSON.stringify({map:st.map,mode:st.mode,speed:st.speed||spdStr(choice.spd),players:roster})});LOBBY.link.set('status','playing');});
 function lobbyFail(e){const m=String(e&&e.message);
   lobbyMsg(m==='noroom'?'그런 방이 없어요. 코드를 다시 확인하세요.':m==='full'?'이미 시작했거나 꽉 찬 방이에요.':m==='load'?'온라인 서버에 연결하지 못했어요. 인터넷 연결을 확인하세요.':'연결하지 못했어요. 잠시 후 다시 해 보세요.',true);
   leaveLobby(true);}
-function leaveLobby(keepMsg){const l=LOBBY.link;LOBBY.link=null;LOBBY.starting=false;LOBBY.room=null;
+function leaveLobby(keepMsg){const l=LOBBY.link;LOBBY.link=null;LOBBY.starting=false;LOBBY.room=null;if(typeof renderSpd==='function')setTimeout(renderSpd,0);
   if(l){if(!NET){if(LOBBY.host)l.remove();else l.set(`slots/s${LOBBY.slot}`,null);}l.close();}
   $('#roomBox').hidden=true;lobbyBusy(false);if(!keepMsg)lobbyMsg('');}
 function beginOnline(m){
@@ -3339,23 +3414,27 @@ function beginOnline(m){
     link.listen(`hash/${h}`,(k,v)=>{if(NET&&NET.link===link){NET.hash[h][+k]=v;netCheckHash(+k);}});
     link.watch(`left/${h}`,v=>{if(v&&NET&&NET.link===link)NET.left[h]=true;});
     link.watch(`drop/${h}`,v=>{if(typeof v==='number'&&NET&&NET.link===link&&NET.gone[h]===undefined)NET.gone[h]=Math.max(v,NET.turn);});}
-  startGame({online:true,map:R0.map,seed:m.seed,diff:'normal',players:P.map(p=>({fac:p.fac,team:p.team,name:p.name,ai:p.ai}))});
+  startGame({online:true,speed:parseSpd(R0.speed||'1,1,1'),map:R0.map,seed:m.seed,diff:'normal',players:P.map(p=>({fac:p.fac,team:p.team,name:p.name,ai:p.ai}))});
   const others=P.filter((p,i)=>i!==mine).map(p=>p.name).join(', ');
   toast(`${others}님과 온라인 대전 시작! 나는 ${FAC[G.side[ME].fac].full}`);
 }
 function netEnd(){if(!NET)return;const n=NET;NET=null;
   try{n.link.cancelLeave();if(n.slot===n.humans[0])setTimeout(()=>n.link.remove(),4000);setTimeout(()=>n.link.close(),4500);}catch(e){}
   LOBBY.link=null;LOBBY.starting=false;}
-function setMode(m){playMode=m;document.querySelectorAll('#modeSeg button').forEach(x=>x.classList.toggle('on',x.dataset.m===m));$('#aiPanel').hidden=m!=='ai';$('#onlinePanel').hidden=m!=='online';$('#repPanel').hidden=m!=='rep';$('.facs').hidden=m==='rep';$('#facLbl').hidden=m==='rep';if(m!=='online')leaveLobby();if(m==='rep')renderRepList();}
+function setMode(m){playMode=m;$('#homeMenu').hidden=true;$('#setup').hidden=false;$('#setupTitle').textContent={ai:'컴퓨터 대전',online:'온라인 대전',rep:'리플레이'}[m];$('#aiPanel').hidden=m!=='ai';$('#onlinePanel').hidden=m!=='online';$('#repPanel').hidden=m!=='rep';$('.facs').hidden=m==='rep';$('#facLbl').hidden=m==='rep';if(m!=='online')leaveLobby();if(m==='rep')renderRepList();$('#spdBox').hidden=m==='rep';renderSpd();}
 function pickFac(f){choice.f=f;document.querySelectorAll('.fac').forEach(x=>x.classList.toggle('on',x.dataset.f===f));
   if(LOBBY.link&&LOBBY.slot>=0&&!LOBBY.starting)LOBBY.link.set(`slots/s${LOBBY.slot}/fac`,f);}
-document.querySelectorAll('#modeSeg button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.m)));
+document.querySelectorAll('#homeMenu button[data-m]').forEach(b=>b.addEventListener('click',()=>{audioInit();setMode(b.dataset.m);}));
+function showHome(){leaveLobby();playMode='ai';$('#setup').hidden=true;$('#homeMenu').hidden=false;}
+$('#backHome').addEventListener('click',showHome);
 try{$('#nameIn').value=localStorage.getItem('nm_name')||'';}catch(e){}
 $('#hostBtn').addEventListener('click',()=>{audioInit();hostRoom();});
 $('#joinBtn').addEventListener('click',()=>{audioInit();joinRoom();});
 $('#codeIn').addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom();});
 $('#lobbyCancel').addEventListener('click',()=>leaveLobby());
 function surrender(){if(!G||G.over)return;send({n:'gg'});}
+
+renderSpd();
 
 /* ========== 명령 기록 · 리플레이 ========== */
 const STEP=.05,REP_VER=2;
@@ -3498,6 +3577,7 @@ function helpBody(t){
       <li><b>지도</b> 언덕 요새(2인)와 네 갈래 고원(4인, 네 모서리 고지대) 두 가지예요. 시작 위치는 매번 무작위로 정해져요.</li>
       <li><b>온라인 대전</b> 방장이 방을 만들면 친구들이 방 코드로 들어와요. 2~4명이 함께하고, 빈자리에는 컴퓨터를 넣을 수 있어요. 누가 나가면 그 군단은 탈락해요.</li>
       <li><b>리플레이</b> 끝낸 게임은 자동으로 저장돼요(마지막 5판). 빠르기(×1~×8)와 시점(전체 보기·각 플레이어)을 바꿔 가며 다시 볼 수 있고, 파일로 저장해 친구에게 보낼 수 있어요.</li>
+      <li><b>게임 속도</b> 컴퓨터 대전이나 온라인 대전을 고른 뒤 건설·생산(연구 포함)·이동 속도를 각각 1~3배로 정할 수 있어요. 처음에는 건설·생산 2배, 이동 1배예요. 온라인에서는 방장이 고른 속도를 써요.</li>
       <li><b>탈락</b> 건물이 하나도 남지 않으면 탈락해요. 탈락해도 남은 군단들의 전투를 계속 지켜볼 수 있어요.</li></ul>
     <p class="hnote">각 군단 탭에서 유닛과 건물을 모두 볼 수 있어요. 게임 중에도 위쪽 <b>설명</b> 버튼이나 F1로 다시 열 수 있어요.</p></div>`;
   if(t==='fight')return `<div class="hsec">
