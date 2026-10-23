@@ -1,5 +1,5 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>냥멍여우 대작전</title>
+<title>냥멍 대작전</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
 <style>
@@ -3083,7 +3083,7 @@ document.querySelectorAll('#teamSeg button').forEach(b=>b.addEventListener('clic
 document.querySelectorAll('#diffSeg button').forEach(b=>b.addEventListener('click',()=>{choice.d=b.dataset.d;document.querySelectorAll('#diffSeg button').forEach(x=>x.classList.toggle('on',x===b));}));
 function resize(){
   const r=APP.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(2,devicePixelRatio||1);
-  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);VW=W;VH=G?H-PANEL_EL.offsetHeight:H;
+  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);VW=W;VH=APP.classList.contains('ingame')?H-PANEL_EL.offsetHeight:H;
   const mr=MINI.getBoundingClientRect();if(mr.width){MINI.width=Math.round(mr.width*DPR);MINI.height=Math.round(mr.height*DPR);}
   clampCam();
 }
