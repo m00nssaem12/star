@@ -1,5 +1,5 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>냥멍 대작전</title>
+<title>냥멍여우 대작전</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
 <style>
@@ -14,7 +14,7 @@
 html{box-sizing:border-box;height:100%}
 [hidden]{display:none!important}
 *,*::before,*::after{box-sizing:inherit}
-body{height:100%;margin:0;overflow:hidden;background:var(--ink);color:var(--text);font-family:var(--f-body)}
+body{height:100%;height:100dvh;margin:0;overflow:hidden;background:var(--ink);color:var(--text);font-family:var(--f-body)}
 #app{position:relative;height:100%;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
 #game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -649,6 +649,7 @@ RES.burrow.desc=()=>'일꾼견·돌격견·사격견·역병견·감염냥이 �
 /* --- 공격 속도를 원작 비율에 맞춤 (소총냥 0.62초 = 15프레임 기준) --- */
 UNIT.dog.ling.cd=.35;UNIT.dog.hydra.cd=.62;UNIT.dog.ultra.cd=.65;UNIT.dog.guardian.cd=1.25;UNIT.dog.brood.cd=.6;
 UNIT.fox.zealot.cd=.91;UNIT.cat.melee.cd=.91;UNIT.cat.goliath.cd=.91;UNIT.dog.devourer.cd=3.0;
+UNIT.fox.dragoon.lockT=.35;UNIT.cat.scoot.lockT=.05;UNIT.cat.tank.lockT=.3;
 
 /* ========== DOM ========== */
 const APP=$('#app'),cv=$('#game'),ctx=cv.getContext('2d'),MINI=$('#mini'),mctx=MINI.getContext('2d');
@@ -1469,6 +1470,7 @@ function setCloak(u,to){const ab=u.def.abil||[];if(u.def.perma)return false;if(!
 /* ========== 이동 ========== */
 function steer(u,tx,ty,ign,dt){
   if(!u.def.speed)return false;
+  if(u.atkLock>0&&u.order.type!=='move')return false;
   if(u.siege||u.siegeT>0){if(u.siege&&u.siegeT<=0)toggleSiege(u,false);return false;}
   if(u.bur||u.burT>0){if(u.bur&&u.burT<=0)setBurrow(u,false);return false;}
   const d=hyp(tx-u.x,ty-u.y);
@@ -1486,7 +1488,8 @@ function steer(u,tx,ty,ign,dt){
   u.stk+=dt;if(u.stk>.8){const m=hyp(u.x-u.lx,u.y-u.ly);u.lx=u.x;u.ly=u.y;u.stk=0;if(m<8){if(d<90){u.path=null;return true;}u.repT=0;}}
   return false;
 }
-function doAttack(u,t){const w=wpn(u,t);u.cd=w.cd*(u.stimT>0?.5:1)*(u.ensT>0?1.33:1)*(u.kind==='ling'&&S_(u).up.adren?.66:1);u.anim=.25;u.lastAtk=G.t;if(u.def.ammo==='scarab'&&!u.hallu)u.ammo--;u.face=t.x>u.x?1:-1;
+function atkLockOf(u,w){const d=u.def;if(u.type!=='unit')return 0;if(d.lockT!==undefined)return d.lockT;if(w.range<=40)return Math.min(.45,w.cd*.55);if(d.flying)return .05;return Math.min(.25,w.cd*.2);}
+function doAttack(u,t){const w=wpn(u,t);u.cd=w.cd*(u.stimT>0?.5:1)*(u.ensT>0?1.33:1)*(u.kind==='ling'&&S_(u).up.adren?.66:1);u.anim=.25;u.lastAtk=G.t;u.atkLock=atkLockOf(u,w)*(u.stimT>0?.5:1);if(u.def.ammo==='scarab'&&!u.hallu)u.ammo--;u.face=t.x>u.x?1:-1;
   if(u.type==='bld')u.ang=Math.atan2(t.y-u.y,t.x-u.x);
   sfxAt(w.fx,u.x,u.y);
   if(u.def.suicide){dmg(t,w.dmg,u,w.dt);if(w.splash&&!u.hallu)for(const e of G.ents){if(e===t||e===u||e.dead||e.side==='n'||e.inside||(e.type!=='unit'&&e.type!=='bld')||isAir(e))continue;const dd=distPt(t.x,t.y,e);if(dd<=w.splash)dmg(e,dd<w.splash*.4?w.dmg*.5:w.dmg*.25,u,w.dt);}boom(t.x,t.y-(isAir(t)?AIRH:0));u.hp=0;u.consumed=!!u.hallu;kill(u,null);return;}
@@ -1546,7 +1549,7 @@ function hatch(e){
 }
 
 function updUnit(u,dt){
-  u.cd-=dt;if(u.anim>0)u.anim-=dt;if(u.hitT>0)u.hitT-=dt;if(u.stimT>0)u.stimT-=dt;u.moving=false;
+  u.cd-=dt;if(u.atkLock>0)u.atkLock-=dt;if(u.anim>0)u.anim-=dt;if(u.hitT>0)u.hitT-=dt;if(u.stimT>0)u.stimT-=dt;u.moving=false;
   const d=u.def,ai=G.aiSides[u.side];
   if(d.bio&&u.hp<u.maxhp)u.hp=Math.min(u.maxhp,u.hp+.35*dt);
   if(u.carrier){carriedStep(u,dt);return;}
@@ -3087,7 +3090,7 @@ function resize(){
   const mr=MINI.getBoundingClientRect();if(mr.width){MINI.width=Math.round(mr.width*DPR);MINI.height=Math.round(mr.height*DPR);}
   clampCam();
 }
-addEventListener('resize',resize);
+addEventListener('resize',resize);if(window.visualViewport)visualViewport.addEventListener('resize',()=>setTimeout(resize,50));addEventListener('orientationchange',()=>setTimeout(resize,200));
 let last=performance.now(),tdir=1;
 function frame(ts){
   const dt=Math.min(.05,(ts-last)/1000);last=ts;
